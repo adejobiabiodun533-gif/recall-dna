@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "StudyMaterial": {
+      "title": "Study Material",
+      "description": "Uploaded lecture notes and summaries",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "fileName": { "type": "string" },
+        "originalContent": { "type": "string", "description": "Extracted text content" },
+        "summary": { "type": "string" },
+        "mnemonics": { "type": "array", "items": { "type": "string" } },
+        "practiceQuestions": { "type": "array", "items": { "type": "object" } },
+        "course": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "fileName", "originalContent"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User document"
+    },
+    "/materials/{materialId}": {
+      "schema": "StudyMaterial",
+      "description": "Study material document"
+    }
+  }
+}
